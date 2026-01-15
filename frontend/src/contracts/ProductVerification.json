@@ -1,0 +1,243 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "serialNumber",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "initialId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "productName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "manufacturer",
+          "type": "string"
+        }
+      ],
+      "name": "ProductRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "serialNumber",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "oldId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "newId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newStage",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProductTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isAuthentic",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "serialNumber",
+          "type": "string"
+        }
+      ],
+      "name": "ProductVerified",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "serialNumber",
+          "type": "string"
+        }
+      ],
+      "name": "getProductDetails",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "productName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "manufacturer",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "manufactureDate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "currentId",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentStage",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "serialNumber",
+          "type": "string"
+        }
+      ],
+      "name": "getProductIdHistory",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "serialNumber",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "initialId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "productName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "manufacturer",
+          "type": "string"
+        }
+      ],
+      "name": "registerProduct",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "serialNumber",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "newId",
+          "type": "string"
+        }
+      ],
+      "name": "transferProduct",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "name": "verifyProduct",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "isAuthentic",
+          "type": "bool"
+        },
+        {
+          "internalType": "string",
+          "name": "serialNumber",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "name": "verifyProductAndEmit",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "isAuthentic",
+          "type": "bool"
+        },
+        {
+          "internalType": "string",
+          "name": "serialNumber",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}

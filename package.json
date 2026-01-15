@@ -1,0 +1,36 @@
+{
+  "name": "blockchain-fake-product-detection",
+  "version": "1.0.0",
+  "description": "This project implements a blockchain-based solution for detecting counterfeit products by dynamically updating product identifiers at each stage of the supply chain. The system ensures product authenticity by verifying that the presented ID is the most recent one recorded on the blockchain.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "hardhat test",
+    "compile": "node scripts/compile.js",
+    "node": "hardhat node",
+    "deploy": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:hardhat": "hardhat run scripts/deploy.js --network hardhat",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network mainnet",
+    "verify": "node scripts/verify.js",
+    "start": "node scripts/start-dev.js",
+    "start:frontend": "cd frontend && npm start",
+    "build:frontend": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "smart-contract",
+    "product-verification",
+    "supply-chain"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.26.1"
+  }
+}
