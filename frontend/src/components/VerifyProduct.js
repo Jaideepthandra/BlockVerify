@@ -30,30 +30,32 @@ const VerifyProduct = ({ contract }) => {
       console.log('Contract address being used:', contract.address);
       
       // First check if the contract is properly initialized
-      if (!contract || !contract.verifyProductAndEmit) {
-        throw new Error('Contract not properly initialized');
+      if (!contract) {
+        throw new Error('Contract not properly initialized. Please check your connection.');
       }
       
       // Use verifyProduct first to get the return values
-      const verifyResult = await contract.verifyProduct(productId);
+      // This is a view function and should not revert unless the contract address is wrong
+      let verifyResult;
+      try {
+        verifyResult = await contract.verifyProduct(productId);
+      } catch (callError) {
+        console.error('Contract call failed:', callError);
+        throw new Error('Could not connect to the contract. The contract address may have changed. Please redeploy or refresh the page.');
+      }
+      
       console.log('Verify result:', verifyResult);
       
-      // Parse the result
+      // Parse the result - verifyProduct returns (bool isAuthentic, string serialNumber)
       const isAuthentic = verifyResult[0];
-      const serialNumber = verifyResult[1];
+      const serialNumber = verifyResult.serialNumber || verifyResult[1];
       
       console.log('Is authentic (parsed):', isAuthentic);
       console.log('Serial number (parsed):', serialNumber);
-      console.log('Serial number type:', typeof serialNumber);
-      console.log('Serial number length:', serialNumber ? serialNumber.length : 0);
-      
-      // Then call verifyProductAndEmit to emit the event (but don't try to get return values)
-      await contract.verifyProductAndEmit(productId);
       
       // Check if the serial number is empty (product not found)
       if (!serialNumber || serialNumber === '' || serialNumber === '0x' || serialNumber === '0x0') {
         console.log('Product not found in blockchain records');
-        console.log('Empty serial number detected:', serialNumber);
         setVerificationResult({
           isAuthentic: false,
           serialNumber: ''
@@ -66,6 +68,13 @@ const VerifyProduct = ({ contract }) => {
         isAuthentic,
         serialNumber
       });
+      
+      // Then call verifyProductAndEmit to emit the event (but don't try to get return values)
+      try {
+        await contract.verifyProductAndEmit(productId);
+      } catch (e) {
+        console.warn('Event emission failed, but verification data was retrieved');
+      }
       
       // If a serial number was found, get additional product details
       if (serialNumber && serialNumber !== '') {

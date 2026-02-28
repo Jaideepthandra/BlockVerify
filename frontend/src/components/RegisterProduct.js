@@ -55,7 +55,15 @@ const RegisterProduct = ({ contract, account }) => {
       setProductName('');
       setManufacturer('');
       
-      setSuccess(`Product registered successfully! Generated ID: ${initialId}. Redirecting to product details...`);
+      setSuccess(`Product registered successfully! Generated ID: ${initialId}`);
+      
+      // Copy to clipboard for convenience
+      try {
+        await navigator.clipboard.writeText(initialId);
+        setSuccess(`Product registered successfully! Generated ID: ${initialId} (Copied to clipboard)`);
+      } catch (err) {
+        console.warn('Failed to copy ID to clipboard');
+      }
       
       // Wait for blockchain state to update before navigating
       let waitTime = 15;
